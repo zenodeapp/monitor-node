@@ -1,5 +1,5 @@
 # Monitor Node
-Script to locally monitor Tendermint-based nodes.
+Script to monitor Tendermint-based nodes and optionally send out alerts using healthchecks.
 
 This has been written by ZENODE and is licensed under the MIT-license (see [LICENSE](./LICENSE)).
 
