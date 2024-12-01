@@ -59,7 +59,7 @@ SERVER_TIME_UNIX=$(date +%s)
 
 if [ -z "$NODE_STATUS" ]; then
   ERROR=1
-  MESSAGE="Error 1: Node is down. Unable to reach RPC ($RPC_URL)."
+  MESSAGE="Error 1: Node is down. Unable to reach RPC."
 else
   BLOCK_HEIGHT=$(echo "$NODE_STATUS" | jq -r '.result.sync_info.latest_block_height')
   CATCHING_UP=$(echo "$NODE_STATUS" | jq -r '.result.sync_info.catching_up')
