@@ -41,6 +41,18 @@ if [ ! -f "$LOG_FILE" ]; then
   echo "=== Monitoring ${TITLE} ===" > "$LOG_FILE"
 fi
 
+# Log purging mechanism
+MAX_LOG_SIZE=1048576  # 1 MB (1024 * 1024 bytes)
+LOG_SIZE=$(stat -c %s "$LOG_FILE")
+
+if [ "$LOG_SIZE" -ge "$MAX_LOG_SIZE" ]; then
+  mv "$LOG_FILE" "${LOG_FILE}.old"
+  # In case you want to retain old logs use this instead:
+  # mv "$LOG_FILE" "${LOG_FILE}_$(date +%Y%m%d_%H%M%S).old"
+  
+  echo "=== Monitoring ${TITLE} ===" > "$LOG_FILE"
+fi
+
 # Fetch node and server data
 NODE_STATUS=$(curl -s --connect-timeout 5 "$RPC_URL/status")
 SERVER_TIME_UNIX=$(date +%s)
